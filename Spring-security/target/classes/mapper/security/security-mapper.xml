@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="security">
+
+	<resultMap id="memberResultSet" type="member">
+		<id column="USER_NO" property="userNo"/>
+		<result column="USER_ID" property='userId'/>
+		<result column="USER_PWD" property="userPwd"/>
+		
+		<result column="USER_NAME" property="nickName"/> <!-- (userName 못쓰니깐) 반드시 수정해주기 -->
+		
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="INTEREST" property="interest"/>	
+		<result column="ENROLL_DATE" property="enrollDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="STATUS" property="status"/>
+		<result column="CHANGE_PWD" property="changePwd"/>
+		<result column="ENABLE" property="enabled"/>
+		
+		<collection property="authorities"
+					javaType="arrayList"
+					ofType="simpleGrantedAuthority"
+					select="selectAuthorities"
+					column="USER_ID"/>
+	</resultMap>
+	
+	<resultMap id="authoritesMap" type="simpleGrantedAuthority">
+		<!-- 내부에 setter함수, 기본생성자가 존재하지 않아서, 매개변수가 있는 생성자 방식으로만 객체 생성이 가능 -->
+		<!-- <result column="AUTHORITY" javaType="String" property="authority"/> -->
+		<constructor>
+			<arg column="AUTHORITY" javaType="string" />
+		</constructor>	
+	</resultMap>
+	
+	<select id="loadUserByUsername" resultMap="memberResultSet">
+		SELECT 
+			*
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="selectAuthorities" resultMap="authoritesMap">
+		SELECT 
+			*
+		FROM AUTHORITY
+		WHERE USER_ID = #{userId}
+	</select>
+	
+</mapper>

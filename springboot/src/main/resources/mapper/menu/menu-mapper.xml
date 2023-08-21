@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="menu">
+<!-- 	<select id="selectMenuList" resultType="menu"> -->		
+	<select id="selectMenuList" resultMap="menuMap">
+		SELECT 
+			*
+		FROM MENU
+		ORDER BY ID DESC
+	</select>
+	
+	<resultMap type="menu" id="menuMap">
+		<result column="type" property="type" typeHandler="menuTypeHandler"/>
+	</resultMap>
+	
+	<select id="selectMenuListByTypeAndTaste" resultMap="menuMap">
+		SELECT *
+		FROM MENU
+		
+		<where>
+			<if test="type != 'all'">
+				TYPE = #{type}
+			</if>
+			<if test="taste != 'all'">
+				AND TASTE = #{taste}
+			</if>
+		</where>
+		
+		<!-- 문제는 없지만 적겨이 아닌 조건문 
+			WHERE 1=1
+			<if test="type" != 'all'">
+				AND TYPE = #{type}
+			</if>
+			<if test="taste" != 'all'">
+				AND TASTE = #{taste}
+			</if> -->
+			
+		ORDER BY ID DESC
+	</select>
+	
+	<insert id="insertMenu">
+		INSERT INTO MENU
+		VALUES (
+			seq_menu_id.NEXTVAL,
+			#{restaurant} ,
+			#{name} ,
+			#{price} ,
+			#{type, typeHandler=MenuTypeHandler} , <!-- menu 타입의 데이터를 그냥 넣을수없다. 그래서 MenuTypeHandler인 setNonNullParameter 사용함 -->
+			#{taste}
+		)
+	</insert>
+	
+	<select id="selectOneMenu" resultMap="menuMap">
+		SELECT *
+		FROM MENU
+		WHERE ID = #{id}
+	</select>
+	
+	<update id="updateMenu">
+		UPDATE MENU
+		   SET RESTAURANT = #{restaurant},
+		   	   NAME = #{name},
+		   	   price = #{price},
+		   	   type = #{type, typeHandler=MenuTypeHandler},
+		   	   taste = #{taste}
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="deleteMenu">
+		DELETE FROM MENU
+		WHERE ID = #{id}
+	</update>
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,17 @@
+자바 초기 설정
+Windows - preferences에서 설정할것
+General - WorkSpace
+	- Editors - Text Editors - Spelling
+
+JSON - JSON Files
+Web - CSS FIles , HTML Files, JSP Files
+
+Maven - User setting >> Maven폴더의 config-setting.xml선택
+Sever - Runtime - 서버 지우기 - 내서버 추가(톰캣9.0)
+XML - XMLcategory - User Specified Entries(add) - Location :  http://mybatis.org/dtd/mybatis-3-config.dtd
+		>>key : -//mybatis.org//DTD Config 3.0//EN
+	User Specified Entries(add) >> Location : http://mybatis.org/dtd/mybatis-3-mapper.dtd
+	key : -//mybatis.org//DTD Mapper 3.0//EN
+
+Tomcat  서버 생성
+프로젝트 생성 - Spring Legacy Project -spring mvc project 선택(3번째위치는 프로젝트명과 일치)
