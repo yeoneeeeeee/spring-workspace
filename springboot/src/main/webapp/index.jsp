@@ -291,6 +291,7 @@
         	});
         	
         	$("#menuUpdateFrm").submit( e => {
+				// 폼제출기능 방지(폼제출 무효화) ;창이 넘어가지 x
         		e.preventDefault();
         		const frm = $(e.target);
         		
