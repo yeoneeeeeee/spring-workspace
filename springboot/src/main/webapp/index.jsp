@@ -277,7 +277,7 @@
 						    frm.find(`[name=taste][value=\${taste}]`).prop("checked",true);
         				} else{
         					alert("해당 메뉴가 존재하지 않습니다.");
-        					$("[name=id]", e.target).select(); //; $("[name=id]", e.target).select();ㄴ -> 포커싱줌
+        					$("[name=id]", e.target).select(); //; $("[name=id]", e.target).select(); -> 포커싱줌
         				}
         			}, 
         			error(xhr, statusText, err){

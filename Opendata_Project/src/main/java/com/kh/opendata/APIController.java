@@ -96,6 +96,44 @@ public class APIController {
 		
 		// 응답데이터를 보내주고자하면 문자열값 그대로 넘겨주면 알아서 JSON형태로 응답됨 ;responsebody로 넘겨주었기 때문에
 		return responseTest;
+	}
+
+	
+	
+	//Test
+	//xml형식으로 활용
+	@RequestMapping(value="test.do" , produces="text/xml; charset=UTF-8")
+	public String TsunamiShelte(String resultCode) throws IOException{
+
+		String url = "http://apis.data.go.kr/1741000/TsunamiShelter3/getTsunamiShelter1List";
+		url += "?serviceKey="+serviceKey;
+		url += "&returnType=xml";
+		url += "pageNo=1";
+		url += "&numOfRows=2"; 
+		url += "&sidoName="+URLEncoder.encode(resultCode, "UTF-8");
+		
+		
+		URL requestUrl = new URL(url); 
+		
+		HttpURLConnection urlConnection = (HttpURLConnection) requestUrl.openConnection();
+		
+		urlConnection.setRequestMethod("GET");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		
+		String responseTest = "";
+		String line;
+		
+		while( (line = br.readLine()) != null ) {
+			responseTest += line;
+		}
+		
+		System.out.println(responseTest);
+		
+		br.close();
+		urlConnection.disconnect();
+		
+		return responseTest;
 		
 	}
 }

@@ -83,7 +83,7 @@
 		ORDER BY B.CREATE_DATE DESC
 	</select>
 	
-	<select id="searchList" parameterType="string" resultMap="boardResultSet">
+	<select id="selectList" parameterType="string" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
 			BOARD_TITLE,

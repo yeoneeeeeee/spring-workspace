@@ -58,7 +58,7 @@
 						let value = "";
 						for(let item of data.response.body.items) { 
 							//console.log(item)
-							//isELIgnored="true" el무시하겠다 추가해주고 나서 사용가능 
+							//상단태그에 isELIgnored="true" el무시하겠다 추가해주고 나서 사용가능 
 							value += `<tr>
 										<td>${item.stationName}</td>
 										<td>${item.dataTime}</td>
@@ -76,8 +76,8 @@
 				})
 			})
 			
+			
 			$("#btn2").click(() => {
-				
 				$.ajax({
 					url : "air2.do",
 					data : {location : $("#location").val()},
@@ -110,12 +110,6 @@
 					}
 				})
 			})
-			
-			
-			
-			
-			
-			
 		})
 	</script>
 </body>
